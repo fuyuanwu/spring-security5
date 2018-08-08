@@ -25,6 +25,7 @@ public class RedisUserDetailsService implements UserDetailsManager {
     private static final String USERNAME_KEY = "username:";
     private AuthenticationManager authenticationManager;
 
+    @Override
     public void createUser(UserDetails user) {
         Assert.isTrue(!userExists(user.getUsername()), "user should not exist");
         saveOrUpdate(user);
@@ -42,6 +43,7 @@ public class RedisUserDetailsService implements UserDetailsManager {
         }
     }
 
+    @Override
     public void deleteUser(String username) {
         RedisConnection conn = getConnection();
 
@@ -54,15 +56,18 @@ public class RedisUserDetailsService implements UserDetailsManager {
         }
     }
 
+    @Override
     public void updateUser(UserDetails user) {
         Assert.isTrue(userExists(user.getUsername()), "user should exist");
         saveOrUpdate(user);
     }
 
+    @Override
     public boolean userExists(String username) {
         return loadUserByUsername(username) != null;
     }
 
+    @Override
     public void changePassword(String oldPassword, String newPassword) {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
 
@@ -113,6 +118,7 @@ public class RedisUserDetailsService implements UserDetailsManager {
         }
     }
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         RedisConnection conn = getConnection();
         try {

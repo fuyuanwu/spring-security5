@@ -3,13 +3,11 @@ package com.pobo.spring.security.demo.configuration;
 import com.pobo.spring.security.demo.service.RedisClientDetailsServiceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -30,8 +28,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients(); // 允许from表单提交
-        security.checkTokenAccess("authenticated"); // 具有什么权限的才会反问接口
+        // 允许from表单提交
+        security.allowFormAuthenticationForClients();
+        // 具有什么权限的才会反问接口
+        security.checkTokenAccess("authenticated");
         security.tokenKeyAccess("authenticated");
     }
 
