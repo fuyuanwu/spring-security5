@@ -1,0 +1,24 @@
+server:
+  port: 9003
+  servlet:
+    context-path: /auth-resouce
+
+security:
+  oauth2:
+    client:
+      client-id: resourceServer1
+      client-secret: 123456
+      grant-type: authorization_code
+      access-token-uri: http://localhost:9001/auth-server/oauth/token
+      user-authorization-uri: http://localhost:9001/auth-server/oauth/authorize
+      client-authentication-scheme: form
+      authentication-scheme: form
+      scope: select
+      token-name: access_token
+    resource:
+      id: client100
+      token-info-uri: http://localhost:9001/auth-server/oauth/check_token
+      user-info-uri: http://localhost:9001/auth-server/user
+logging:
+  level:
+    org.springframework.security: DEBUG

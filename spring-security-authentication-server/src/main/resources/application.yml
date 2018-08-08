@@ -1,0 +1,24 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /auth-server
+
+
+# REDIS (RedisProperties)
+# Redis数据库索引（默认为0）
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+     pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1
+
+logging:
+  level:
+    org.springframework.security: DEBUG
